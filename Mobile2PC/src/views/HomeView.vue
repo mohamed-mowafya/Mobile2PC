@@ -1,0 +1,55 @@
+<template>
+  <qrcode-vue :value="qrCode" :level="level" :render-as="renderAs" />
+</template>
+
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import QrcodeVue, { Level, RenderAs } from 'qrcode.vue'
+import { io } from 'socket.io-client'
+
+const qrCode = ref<string>('')
+const level = ref<Level>('M')
+const renderAs = ref<RenderAs>('svg')
+
+onMounted(() => {
+  handleSocket()
+})
+
+const handleSocket = () => {
+  const socket = io('http://localhost:8082')
+  socket.on('connect', () => {
+    qrCode.value = `http://localhost:8082/fileUpload/${socket.id}`
+  })
+
+  socket.on('fileUploaded', (file: FileType) => {
+    try {
+      handleDownload(file)
+      socket.emit('disconnectSocket')
+    } catch (e) {
+      console.error('An error has occured while downloading the file.')
+    }
+  })
+}
+
+const handleDownload = (file: FileType) => {
+  const blob = new Blob([file.buffer], { type: file.mimetype })
+  const link = document.createElement('a')
+  const blobUrl = URL.createObjectURL(blob)
+
+  link.href = blobUrl
+  link.download = file.originalname
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(blobUrl)
+}
+
+interface FileType {
+  buffer: ArrayBuffer
+  encoding: string
+  fieldname: string
+  mimetype: string
+  originalname: string
+  size: number
+}
+</script>
