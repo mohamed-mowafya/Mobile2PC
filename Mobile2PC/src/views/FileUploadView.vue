@@ -6,11 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const router = useRouter()
 const connectionId = ref<string>((route.params.connectionId as string) || '')
 let selectedFile: File | null = null
 
