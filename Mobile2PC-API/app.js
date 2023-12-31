@@ -1,21 +1,37 @@
 const express = require("express");
-const app = express();
+const http = require('http');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const configureSocket = require('./configs/socketConfig');
+const fileRoute = require('./routes/fileRoute');
+const cors = require('cors');
+const helmet = require('helmet');
+
 dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+const io = configureSocket(server);
 
 const port = process.env.PORT || 8080;
 
-const filerouter = require("./routes/fileRoute");
-
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/", filerouter);
+const corsOptions = {
+  origin: process.env.FRONT_URL
+}
+app.use(cors(corsOptions));
+app.use(helmet());
+
+app.use("/", fileRoute(io));
 app.get("/health", (req, res) => {
   res.send("Up and running!");
 });
 
-app.listen(port, () => {
+io.on('connection', (socket) =>{
+  console.log(socket.id)
+});
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

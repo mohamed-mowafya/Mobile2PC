@@ -34,9 +34,9 @@ onMounted(() => {
 })
 
 const handleSocket = () => {
-  const socket = io('http://localhost:8082')
+  const socket = io(process.env.API_ENDPOINT_URL)
   socket.on('connect', () => {
-    qrCode.value = `http://localhost:8082/fileUpload/${socket.id}`
+    qrCode.value = `${process.env.API_ENDPOINT_URL}/fileUpload/${socket.id}`
   })
 
   socket.on('fileUploaded', (file: FileType) => {

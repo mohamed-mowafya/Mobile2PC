@@ -1,20 +1,20 @@
 <template>
   <div class="flex justify-center">
-  <p class="title-font text-white text-3xl p-2 mt-9">
-    Choose a file and press upload !
-  </p>
-</div>
+    <p class="title-font text-white text-3xl p-2 mt-9">
+      Choose a file and press upload !
+    </p>
+  </div>
   <div class="file-upload-container">
     <div class="flex flex-col">
       <label class="block">
-        <input type="file" class="mb-4 block w-full text-sm text-gray-500
+        <input v-on:change="onFileUpload" type="file" class="mb-4 block w-full text-sm text-gray-500
             file:me-4 file:py-2 file:px-4
             file:rounded-lg file:border-0
             file:text-sm file:font-semibold
             file:bg-white file:text-black
             dark:file:bg-white">
       </label>
-      <button class="bg-white text-black font-bold py-2 px-6 rounded-full">Upload</button>
+      <button @click="uploadFile" class="bg-white text-black font-bold py-2 px-6 rounded-full">Upload</button>
     </div>
   </div>
 </template>
@@ -47,13 +47,13 @@ const uploadFile = async () => {
   formData.append('sid', connectionId.value)
 
   try {
-    const response = await fetch('http://localhost:8082/upload', {
+   await fetch(`${process.env.API_ENDPOINT_URL}/upload`, {
       method: 'POST',
       body: formData
     })
 
-    // Handle the response as needed
-    console.log('Upload successful', response)
+    // Handle the response by showing a toast
+    
   } catch (error) {
     console.error('Error uploading file', error)
   }
