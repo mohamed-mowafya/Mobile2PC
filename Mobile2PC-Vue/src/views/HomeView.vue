@@ -22,7 +22,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import QrcodeVue, { Level, RenderAs } from 'qrcode.vue'
+import QrcodeVue from 'qrcode.vue'
+import type {Level, RenderAs} from 'qrcode.vue'
 import { io } from 'socket.io-client'
 
 const qrCode = ref<string>('')
@@ -34,7 +35,7 @@ onMounted(() => {
 })
 
 const handleSocket = () => {
-  const socket = io(process.env.API_ENDPOINT_URL)
+  const socket = io(`${process.env.API_ENDPOINT_URL}`)
   socket.on('connect', () => {
     qrCode.value = `${process.env.API_ENDPOINT_URL}/fileUpload/${socket.id}`
   })
