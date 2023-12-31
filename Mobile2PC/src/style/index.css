@@ -20,3 +20,11 @@
   .animate-custom-bounce {
     animation: custom-bounce 1s infinite;
   }
+
+  .file-upload-container {
+    margin-top: 18rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+  }
