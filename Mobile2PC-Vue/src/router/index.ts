@@ -11,9 +11,13 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/fileUpload/:connectionId',
-      name: 'fileUpload',
+      path: '/file-upload/:connectionId',
+      name: 'file-upload',
       component: fileUpload
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      component: HomeView
     },
   ]
 })

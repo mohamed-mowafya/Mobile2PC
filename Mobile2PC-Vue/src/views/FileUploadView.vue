@@ -1,7 +1,21 @@
 <template>
-  <div class="file-upload_area">
-    <input type="file" name="" id="" v-on:change="onFileUpload" />
-    <button @click="uploadFile">Upload</button>
+  <div class="flex justify-center">
+  <p class="title-font text-white text-3xl p-2 mt-9">
+    Choose a file and press upload !
+  </p>
+</div>
+  <div class="file-upload-container">
+    <div class="flex flex-col">
+      <label class="block">
+        <input type="file" class="mb-4 block w-full text-sm text-gray-500
+            file:me-4 file:py-2 file:px-4
+            file:rounded-lg file:border-0
+            file:text-sm file:font-semibold
+            file:bg-white file:text-black
+            dark:file:bg-white">
+      </label>
+      <button class="bg-white text-black font-bold py-2 px-6 rounded-full">Upload</button>
+    </div>
   </div>
 </template>
 
@@ -15,7 +29,7 @@ let selectedFile: File | null = null
 
 const onFileUpload = (e: Event) => {
   const inputElement = e.target as HTMLInputElement
-  const files = inputElement.files
+  const files = inputElement.files as FileList | null
 
   if (files && files.length == 1) {
     selectedFile = files[0]
