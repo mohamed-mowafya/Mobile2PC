@@ -44,6 +44,7 @@ const handleSocket = () => {
     try {
       handleDownload(file)
       socket.emit('disconnectSocket')
+      window.location.href = import.meta.env.VITE_FRONT_URL
     } catch (e) {
       console.error('An error has occured while downloading the file.')
     }
