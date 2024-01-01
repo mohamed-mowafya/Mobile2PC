@@ -4,10 +4,13 @@
       Choose a file and press upload !
     </p>
   </div>
+  <div class="mt-6 flex justify-center">
+    <img width="350" src="/images/black_upload_img.png"/>
+  </div>
   <div class="file-upload-container">
     <div class="flex flex-col">
       <label class="block">
-        <input v-on:change="onFileUpload" type="file" class="mb-4 block w-full text-sm text-gray-500
+        <input v-on:change="onFileUpload" type="file" class="mb-7 block w-full text-sm text-gray-500
             file:me-4 file:py-2 file:px-4
             file:rounded-lg file:border-0
             file:text-sm file:font-semibold
