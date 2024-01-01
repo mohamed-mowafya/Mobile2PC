@@ -50,7 +50,7 @@ const uploadFile = async () => {
   formData.append('sid', connectionId.value)
 
   try {
-   await fetch(`${process.env.API_ENDPOINT_URL}/upload`, {
+   await fetch(`${import.meta.env.VITE_API_ENDPOINT_URL}/upload`, {
       method: 'POST',
       body: formData
     })
