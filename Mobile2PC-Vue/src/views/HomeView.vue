@@ -37,7 +37,7 @@ onMounted(() => {
 const handleSocket = () => {
   const socket = io(`${import.meta.env.VITE_API_ENDPOINT_URL}`)
   socket.on('connect', () => {
-    qrCode.value = `${import.meta.env.VITE_API_ENDPOINT_URL}/fileUpload/${socket.id}`
+    qrCode.value = `${import.meta.env.VITE_API_ENDPOINT_URL}/file-upload/${socket.id}`
   })
 
   socket.on('fileUploaded', (file: FileType) => {
