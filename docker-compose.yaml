@@ -1,0 +1,11 @@
+services:
+  www:
+    build:
+      context: ./Mobile2PC-Vue
+    ports:
+      - "8080:8080"
+  api:
+    build:
+      context: ./Mobile2PC-API
+    ports:
+      - "8000:8000"
