@@ -1,7 +1,7 @@
 # Mobile2PC Project
 
 ## Introduction
-Welcome to the Mobile2PC project! This solution allows for instant file transfers from your mobile device to your PC using a QR Code.
+Welcome to the Mobile2PC project! This solution allows for instant file transfers from your mobile device to your PC using a simple QR Code.
 
 ## Project Structure
 The project is divided into two components:
@@ -29,7 +29,7 @@ Clone the repository and ensure Docker and Docker Compose are installed on your 
 
 ## Building and Running the Project
 Navigate to the repository's root and run:
-- `docker-compose up --build`
+- `docker-compose up -d`
 - **Note**: Make sure to change the API and FRONT-END URLs in the Dockerfile to match your local machine's IP address. This ensures the web application is accessible from a mobile device on the same network.
 
 ## Usage
